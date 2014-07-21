@@ -1,0 +1,118 @@
+
+//
+// Erstellt am: 06.04.2009
+// Autor: M
+//
+// Erstellt ein Textfeld für Debug-Zwecke; mittels einer Funktion kann ein
+// String zur Ausgabe übergeben werden.
+//
+// ***
+//
+// LETZTE ÄNDERUNG:
+//
+// TT.MM.JJJJ: Autor
+//	Beschreibung
+// 13.01.2009: M
+//	Die neue Funktion cdbg erstellt (create) ein Debug-Textfeld.
+//
+
+
+// Gibt einen Text im Dbg-Textfeld aus!
+// Ist die Flag r:5 (bg ... Hintergrund) gesetzt, so wird dem Textfeld ein
+// heller Hintergrund verpaßt:
+function2 dbg (r:2="text",r:3="add",r:5="bg") (r:1="_root")
+
+	hole_dbg_instanz:
+
+		push	200
+		push	1
+		push	r:1
+		push	"getInstanceAtDepth"
+		callMethod
+		setRegister r:4
+		push	UNDEF
+		equals
+		branchIfTrue init_dbg
+
+	init_dbg_bg:
+
+		push	r:5
+		push	UNDEF
+		equals
+		branchIfTrue check_text_add
+		push	r:4
+		push	"background"
+		push	TRUE
+		setMember
+		push	r:4
+		push	"backgroundColor"
+		push	60000
+		setMember
+
+	check_text_add:
+
+		push	r:3
+		push	TRUE
+		equals
+		branchIfTrue add_to_str
+		push	r:4
+		push	"text"
+		push	r:2
+		setMember
+		branch	ende_dbg
+
+	add_to_str:
+
+		push	r:4
+		push	"text"
+		push	r:4
+		push	"text"
+		getMember
+		push	", "
+		add
+		push	r:2
+		add
+		setMember
+		branch	ende_dbg
+
+	init_dbg:
+
+		push	20
+		push	100
+		push	0
+		push	0
+		push	200
+		push	"dbg"
+		push	6
+		push	r:1
+		push	"createTextField"
+		callMethod
+		setRegister r:4
+		pop
+		branch	init_dbg_bg
+
+	ende_dbg:
+
+end
+
+
+function2 cdbg () (r:1="_root")
+
+	push	20		//Height
+	push	100		//Width
+	push	0		//y
+	push	0		//x
+	push	200		//Depth/Level
+	push	"dbg"		//Instance-Name
+	push	6
+	push	r:1
+	push	"createTextField"
+	callMethod
+setRegister r:2
+	pop
+push	"huhu"
+push	"text"
+push	r:2
+setMember
+
+end

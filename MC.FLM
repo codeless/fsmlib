@@ -1,0 +1,44 @@
+
+//
+// Erstellt am: 06.04.2009
+// Autor: M
+//
+// MC-Funktionen
+//
+// ***
+//
+// LETZTE ÄNDERUNG:
+//
+// TT.MM.JJJJ: Autor
+//	Beschreibung
+//
+
+
+function2 newmc (r:2="level",r:3="parent") (r:1="_root")
+
+	check_for_parent:
+
+		push	r:3
+		push	UNDEF
+		equals
+		not
+		branchIfTrue create_new_mc
+
+	set_root_as_parent:
+
+		push	r:1
+		setRegister r:3
+		pop
+
+	create_new_mc:
+		push	r:2	// level
+		push	"mc"	// name
+		push	r:2
+		add
+		push	2
+		push	r:3
+		push	"createEmptyMovieClip"
+		callMethod
+		return
+
+end

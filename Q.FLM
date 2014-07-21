@@ -1,0 +1,67 @@
+
+//
+// Erstellt am: 03.04.2009
+// Autor: M
+//
+// Zeichnet ein Quadrat.
+// TODO: Optimierung der Funktion unter Verwendung der Funktion rect.
+//
+// ***
+//
+// LETZTE ÄNDERUNG:
+//
+// TT.MM.JJJJ: Autor
+//	Beschreibung
+//
+
+
+#include "rect.flm"
+
+function2 q (r:2="mc",r:3="size") (r:1="_root")
+
+	move_to_startpos:
+
+		push	0
+		push	0
+		push	2
+		push	r:2
+		push	"moveTo"
+		callMethod
+
+	begin_fill:
+
+		push	0
+		push	1
+		push	r:2
+		push	"beginFill"
+		callMethod
+
+	draw_quad:
+
+		push	0
+		push	r:3
+		push	2
+		push	r:2
+		push	"lineTo"
+		callMethod
+		push	r:3
+		push	r:3
+		push	2
+		push	r:2
+		push	"lineTo"
+		callMethod
+		push	r:3
+		push	0
+		push	2
+		push	r:2
+		push	"lineTo"
+		callMethod
+
+	finish_draw:
+
+		push	0
+		push	r:2
+		push	"endFill"
+		callMethod
+
+end

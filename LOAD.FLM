@@ -1,0 +1,58 @@
+
+//
+// Created on: 2010-01-13
+// Author: M
+//
+// Preloading functions.
+//
+// ***
+//
+// LAST MODIFICATION:
+//
+// YYYY-MM-DD: Author
+//	Description
+// 2010-09-27: M
+//	Added the fastload function.
+//
+
+
+//Fastloading of a file.
+function2 fastload
+	(r:2="depth",r:3="url",r:4="listener")
+	(r:1="_root")
+
+	//Create new MovieClipLoader:
+	push	0
+	push	"MovieClipLoader"
+	new
+	setRegister r:6
+	pop
+
+	//Add listener, if given:
+	push	r:4
+	push	UNDEF
+	equals
+	branchIfTrue create_mc
+	push	r:4
+	push	1
+	push	r:6
+	push	"addListener"
+	callMethod
+	pop
+
+	//Create new MovieClip:
+  create_mc:
+	push	r:2
+	push	"mcfl"
+	push	2
+	push	r:1
+	push	"createEmptyMovieClip"
+	callMethod
+  load_url:	//MC is already on the stack
+	push	r:3	//url
+	push	2
+	push	r:6
+	push	"loadClip"
+	callMethod
+
+end

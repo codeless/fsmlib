@@ -1,0 +1,55 @@
+
+//
+// Created on: 2010-09-23
+// Author: M
+//
+// Function for creating textfields with or without textformats.
+//
+// ***
+//
+// LAST MODIFICATION:
+//
+// YYYY-MM-DD: Author
+//	Description
+//
+
+
+//Creates an textfield
+function2 textfld (
+	r:2="x",
+	r:3="y",
+	r:4="width",
+	r:5="height",
+	r:6="depth")
+	(r:1="_root")
+
+	//Compile textfield name, which is a combination
+	//of the string "tf" and the depth:
+	push	"tf"
+	push	r:6
+	add
+	setRegister r:7
+	pop			//pop Name from stack
+
+	//Create textfield:
+	push	r:5		//Height
+	push	r:4		//Width
+	push	r:3		//Y-Pos.
+	push	r:2		//X-Pos.
+	push	r:6		//Level/Depth
+	push	r:7		//Name of instance
+	push	6 
+	push	r:1 
+	push	'createTextField' 
+	callMethod 
+	pop 
+
+	//Return instance:
+	push	r:6
+	push	1 
+	push	r:1 
+	push	'getInstanceAtDepth' 
+	callMethod 
+	return
+
+end
